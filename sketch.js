@@ -29,7 +29,7 @@ function setup() {
   background("white");
   textAlign(CENTER);
   noFill();
-  textSize(300);
+  textSize(600);
   stroke("black");
   noFill();
   text("simb", windowWidth / 2, windowHeight / 3);
