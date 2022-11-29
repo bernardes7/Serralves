@@ -29,7 +29,7 @@ function setup() {
   background("white");
   textAlign(CENTER);
   noFill();
-  textSize(600);
+  textSize(400);
   stroke("black");
   noFill();
   text("simb", windowWidth / 2, windowHeight / 3);
@@ -170,7 +170,11 @@ function mousePressed() {
     text('the seasons',windowWidth/2, windowHeight/2 - 50); 
     text('to activate', windowWidth/2, windowHeight/2);
     setInterval(run, 2000);
-  } else {
+  }
+}
+
+function doubleClicked() {
+  if (playing) {
    // Spring
     if (
       mouseX > 0 &&
@@ -257,5 +261,3 @@ function mousePressed() {
     run();
   }
 }
-
-// <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1"/>
