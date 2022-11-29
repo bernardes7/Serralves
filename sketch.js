@@ -39,12 +39,12 @@ function setup() {
   circle(windowWidth / 2, windowHeight / 2, windowWidth / 1.5);
   stroke("white");
   textAlign(CENTER);
-  textSize(100);
-  noFill()
-  text('start', windowWidth / 2, windowHeight / 2 + 10);
   textSize(50);
+  noFill()
+  text('tap to', windowWidth / 2, (windowHeight / 2) - 50);
+  textSize(100);
   noFill();
-  text('double tap', windowWidth / 2, windowHeight / 2 + 50);
+  text('start', windowWidth / 2, (windowHeight / 2) + 50);
 
   // audio constructors
   wind = new p5.Noise();
@@ -160,20 +160,20 @@ function stop() {
   dog.stop();
 }
 
-function touchStarted() {
+function mousePressed() {
   if (!playing) {
     fullscreen(1);
     background('white');
     stroke('black');
     textSize(50);
-    text('double click', windowWidth/2, windowHeight/2 -100); 
+    text('double tap', windowWidth/2, windowHeight/2 -100); 
     text('the seasons',windowWidth/2, windowHeight/2 - 50); 
     text('to activate', windowWidth/2, windowHeight/2);
     setInterval(run, 2000);
   }
 }
 
-function touchStarted() {
+function doubleClicked() {
   if (playing) {
    // Spring
     if (
@@ -261,3 +261,5 @@ function touchStarted() {
     run();
   }
 }
+
+// <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1"/>
