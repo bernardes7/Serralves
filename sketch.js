@@ -160,7 +160,7 @@ function stop() {
   dog.stop();
 }
 
-function doubleClicked() {
+function mousePressed() {
   if (!playing) {
     fullscreen(1);
     background('white');
