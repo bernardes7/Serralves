@@ -126,6 +126,7 @@ function playRain(start, min, max, w, v) {
 
 function run() {
   playing = 1;
+  fullscreen(1);
   createCanvas(windowWidth, windowHeight);
 
   noFill('darkgrey');
