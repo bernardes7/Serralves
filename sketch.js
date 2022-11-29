@@ -160,7 +160,7 @@ function stop() {
   dog.stop();
 }
 
-function mousePressed() {
+function touchStarted() {
   if (!playing) {
     fullscreen(1);
     background('white');
@@ -173,7 +173,7 @@ function mousePressed() {
   }
 }
 
-function doubleClicked() {
+function touchStarted() {
   if (playing) {
    // Spring
     if (
