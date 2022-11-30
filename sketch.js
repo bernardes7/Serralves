@@ -26,7 +26,7 @@ function preload() {
 }
 
 function setup() {
-  frameRate(4);
+  // frameRate(4);
   createCanvas(windowWidth, windowHeight);
   background("white");
   textAlign(CENTER);
@@ -171,7 +171,7 @@ function stop() {
 
 function mousePressed() {
   if (!playing) {
-    // fullscreen(1);
+    fullscreen(1);
     background('white');
     stroke('black');
     textSize(50);
