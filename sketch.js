@@ -33,8 +33,8 @@ function preload() {
 }
 
 function setup() {
-  frameRate(4);
   createCanvas(windowWidth, windowHeight);
+  frameRate(4);
   background("white");
   textAlign(CENTER);
   noFill();
