@@ -67,9 +67,12 @@ function draw() {
 
   // Spring
   if (playing === 1 && option === 1) {
+    if(drops.isPlaying() === false){drops.loop();
+    reverb.process(drops,3,1);}
+    drops.rate(map(noise(nOff), 0, 1, 0.4, 1.3));
     if (birds.isPlaying() === false) {
       birds.play();
-    }
+  }
     if(random(100) < 8) {
     cricket.play(0, random(0.5, 2), 0.6, 0);
     }
@@ -107,7 +110,7 @@ function draw() {
     if (drops.isPlaying() === false && second() % 5 === 0) {
     drops.play();
     reverb.process(drops,3,1);
-    setInterval(drops.play(), 2500);
+    setTimeout(drops.play(), 2500);
     }
     if(accel>20 && thunder.isPlaying() === false){thunder.play(0,random(0.5,1.5),0.5,random(1))}
     drops.rate(map(noise(nOff), 0, 1, 0.4, 1.3));
@@ -167,6 +170,8 @@ function stop() {
   drops.stop();
   leaves.stop();
   dog.stop();
+  cricket.stop();
+  glass.stop();
 }
 
 function mousePressed() {
@@ -192,6 +197,7 @@ function doubleClicked() {
       mouseY < windowHeight / 2
     ) {
       if (option != 1) {
+        stop();
         option = 1;
         colorSpring = "red";
         colorSummer = "white";
@@ -213,6 +219,7 @@ function doubleClicked() {
       mouseY < windowHeight / 2
     ) {
       if (option != 2) {
+        stop();
         option = 2;
         colorSpring = "white";
         colorSummer = "red";
@@ -234,6 +241,7 @@ function doubleClicked() {
       mouseY < windowHeight
     ) {
       if (option != 3) {
+        stop();
         option = 3;
         colorSpring = "white";
         colorSummer = "white";
@@ -255,6 +263,7 @@ function doubleClicked() {
       mouseY < windowHeight
     ) {
       if (option != 4) {
+        stop();
         option = 4;
         colorSpring = "white";
         colorSummer = "white";
