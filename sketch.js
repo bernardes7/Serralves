@@ -204,10 +204,12 @@ function mousePressed() {
     createCanvas(w, h);
     background("white");
     stroke("black");
+    fill("black);
     textSize(50);
     text("double tap", w / 2, h / 2 - 100);
+    noFill();
     text("the seasons", w / 2, h / 2 - 50);
-    text("to activate", w / 2, h / 2);
+    text("to (de)activate", w / 2, h / 2);
     setTimeout(run, 2000);
   }
 }
