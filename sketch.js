@@ -197,6 +197,8 @@ function mousePressed() {
   if (!playing) {
     glass.play(0,1,1,0);
     fullscreen(1);
+    w =windowWidth;
+    h = windowHeight;    
     createCanvas(w, h);
     background("white");
     stroke("black");
