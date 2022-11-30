@@ -33,10 +33,10 @@ function setup() {
   noFill();
   textSize(400);
   stroke("black");
-  noFill();
+  fill(0,0,0,100);
   text("simb", windowWidth / 2, windowHeight / 3);
   text("iose", windowWidth / 2, windowHeight);
-  fill("red");
+  fill(255,0,0,180);
   noStroke();
   circle(windowWidth / 2, windowHeight / 2, windowWidth / 1.5);
   stroke("white");
@@ -96,7 +96,7 @@ function draw() {
     leaves.rate(map(noise(nOff), 0, 1, 0.6, 1));
    
     if (dog.isPlaying() === false && random(100) < 5) {
-      dog.play(0, 1, 0.6, random(0.4));
+      dog.play(0, 1, 0.6, random(0.2));
 
     }
     dog.rate(map(noise(nOff), 0, 1, 0.4, 1));
