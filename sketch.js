@@ -1,3 +1,4 @@
+let w, h;
 let playing = 0;
 let option = 0;
 let accel = 0.0;
@@ -33,7 +34,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  w =windowWidth;
+  h = windowHeight;
+  createCanvas(w,h);
   frameRate(4);
   background("white");
   textAlign(CENTER);
@@ -41,19 +44,19 @@ function setup() {
   textSize(400);
   stroke("black");
   noFill();
-  text("simb", windowWidth / 2, windowHeight / 3);
-  text("iose", windowWidth / 2, windowHeight);
+  text("simb", w / 2, h / 3);
+  text("iose", w / 2, h);
   fill(255, 0, 0, 200);
   noStroke();
-  circle(windowWidth / 2, windowHeight / 2, windowWidth / 1.5);
+  circle(w / 2, h / 2, w / 1.5);
   stroke("white");
   textAlign(CENTER);
   textSize(50);
   noFill();
-  text("tap to", windowWidth / 2, windowHeight / 2 - 50);
+  text("tap to", w / 2, h / 2 - 50);
   textSize(100);
   noFill();
-  text("start", windowWidth / 2, windowHeight / 2 + 50);
+  text("start", w / 2, h / 2 + 50);
 
   // audio constructors
   wind = new p5.Noise();
@@ -152,28 +155,28 @@ function playRain(start, min, max, w, v) {
 function run() {
   clear();
   playing = 1;
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(w, h);
 
   noFill("darkgrey");
   stroke("black");
 
   fill(colorSpring);
-  rect(0, 0, windowWidth / 2, windowHeight / 2);
+  rect(0, 0, w / 2, h / 2);
   textAlign(LEFT);
   textSize(40);
   text("spring", 10, 50);
 
   fill(colorSummer);
-  rect(windowWidth / 2, 0, windowWidth - 10, windowHeight / 2);
-  text("summer", windowWidth / 2 + 10, 50);
+  rect(w / 2, 0, w - 10, h / 2);
+  text("summer", w / 2 + 10, 50);
 
   fill(colorAutumn);
-  rect(0, windowHeight / 2, windowWidth / 2, windowHeight - 10);
-  text("autumn", 10, windowHeight / 2 + 50);
+  rect(0, h / 2, w / 2, h - 10);
+  text("autumn", 10, h / 2 + 50);
 
   fill(colorWinter);
-  rect(windowWidth / 2, windowHeight / 2, windowWidth - 1, windowHeight - 10);
-  text("winter", windowWidth / 2 + 10, windowHeight / 2 + 50);
+  rect(w / 2, h / 2, w - 1, h - 10);
+  text("winter", w / 2 + 10, h / 2 + 50);
 }
 
 function stop() {
@@ -194,13 +197,13 @@ function mousePressed() {
   if (!playing) {
     glass.play(0,1,1,0);
     fullscreen(1);
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(w, h);
     background("white");
     stroke("black");
     textSize(50);
-    text("double tap", windowWidth / 2, windowHeight / 2 - 100);
-    text("the seasons", windowWidth / 2, windowHeight / 2 - 50);
-    text("to activate", windowWidth / 2, windowHeight / 2);
+    text("double tap", w / 2, h / 2 - 100);
+    text("the seasons", w / 2, h / 2 - 50);
+    text("to activate", w / 2, h / 2);
     setTimeout(run, 2000);
   }
 }
@@ -210,9 +213,9 @@ function doubleClicked() {
     // Spring
     if (
       mouseX > 0 &&
-      mouseX < windowWidth / 2 &&
+      mouseX < w / 2 &&
       mouseY > 0 &&
-      mouseY < windowHeight / 2
+      mouseY < h / 2
     ) {
       if (option != 1) {
         stop();
@@ -231,10 +234,10 @@ function doubleClicked() {
 
     // Summer
     if (
-      mouseX > windowWidth / 2 &&
-      mouseX < windowWidth &&
+      mouseX > w / 2 &&
+      mouseX < w &&
       mouseY > 0 &&
-      mouseY < windowHeight / 2
+      mouseY < w / 2
     ) {
       if (option != 2) {
         stop();
@@ -254,9 +257,9 @@ function doubleClicked() {
     // Autumn
     if (
       mouseX > 0 &&
-      mouseX < windowWidth / 2 &&
-      mouseY > windowHeight / 2 &&
-      mouseY < windowHeight
+      mouseX < w / 2 &&
+      mouseY > h / 2 &&
+      mouseY < h
     ) {
       if (option != 3) {
         stop();
@@ -275,10 +278,10 @@ function doubleClicked() {
 
     // Winter
     if (
-      mouseX > windowWidth / 2 &&
-      mouseX < windowWidth &&
-      mouseY > windowHeight / 2 &&
-      mouseY < windowHeight
+      mouseX > w / 2 &&
+      mouseX < w &&
+      mouseY > h / 2 &&
+      mouseY < h
     ) {
       if (option != 4) {
         stop();
