@@ -21,6 +21,8 @@ function preload() {
   leaves = loadSound("assets/leaves.ogg");
   dog = loadSound("assets/dog.ogg");
   thunder = loadSound("assets/thunder.ogg");
+  glass = loadSound("assets/glass.ogg");
+  cricket = loadSound("assets/cricket.ogg");
 }
 
 function setup() {
@@ -52,9 +54,9 @@ function setup() {
   wind.start();
   filtr = new p5.BandPass();
   reverb = new p5.Reverb();
-  chord.setVolume(0.1);
-  synth = new p5.MonoSynth();
-  synth.disconnect();
+  
+  glass.playMode('sustain');
+
 }
   
 function draw() {
@@ -68,16 +70,23 @@ function draw() {
     if (birds.isPlaying() === false) {
       birds.play();
     }
-    birds.rate(map(noise(nOff), 0, 1, 0.2, 1.7));
+    if(random(100) < 8) {
+    cricket.play(0, random(0.5, 2), 0.6, 0);
+    }
+      birds.rate(map(noise(nOff), 0, 1, 0.2, 1.7));
     let vol = min(accel / 60, 1);
+    print(vol);
     birds.setVolume(vol);
   }
   
     // Summer
-  if (playing === 1 && option === 2 && random(100) < 5) {
-    synth.play('A5', 0.8, 0, 0.5);
-    reverb.process(synth, 1, 0.5);
+  if (playing === 1 && option === 2){ 
+    let rand = random(100); 
+    if(rand < 10) {
+    let tones = [0.35,0.4,0.45,0.5,0.55];
+    glass.play(0, tones[int(random(tones.length))], 0.1, 0);
     }
+  }
 
      // Autumn
   if (playing === 1 && option === 3) {
@@ -87,10 +96,10 @@ function draw() {
     leaves.rate(map(noise(nOff), 0, 1, 0.6, 1));
    
     if (dog.isPlaying() === false && random(100) < 5) {
-      dog.play(0, 1, 0.6, random(0.5));
+      dog.play(0, 1, 0.6, random(0.4));
 
     }
-    dog.rate(map(noise(nOff), 0, 1, 0.7, 1.2));
+    dog.rate(map(noise(nOff), 0, 1, 0.4, 1));
   } 
 
   //winter
@@ -100,7 +109,7 @@ function draw() {
     reverb.process(drops,3,1);
     setInterval(drops.play(), 2500);
     }
-    if(accel>20 && thunder.isPlaying() === false){thunder.play(0,random(0.5,1),0.8,random(1))}
+    if(accel>20 && thunder.isPlaying() === false){thunder.play(0,random(0.5,1.5),0.5,random(1))}
     drops.rate(map(noise(nOff), 0, 1, 0.4, 1.3));
   }
 }
@@ -126,7 +135,6 @@ function playRain(start, min, max, w, v) {
 
 function run() {
   playing = 1;
-  fullscreen(1);
   createCanvas(windowWidth, windowHeight);
 
   noFill('darkgrey');
@@ -163,14 +171,14 @@ function stop() {
 
 function mousePressed() {
   if (!playing) {
-    fullscreen(1);
+    // fullscreen(1);
     background('white');
     stroke('black');
     textSize(50);
     text('double tap', windowWidth/2, windowHeight/2 -100); 
     text('the seasons',windowWidth/2, windowHeight/2 - 50); 
     text('to activate', windowWidth/2, windowHeight/2);
-    setInterval(run, 2000);
+    setTimeout(run, 2000);
   }
 }
 
@@ -262,5 +270,3 @@ function doubleClicked() {
     run();
   }
 }
-
-// <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1"/>
