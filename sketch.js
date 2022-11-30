@@ -12,22 +12,24 @@ let colorSummer = "white";
 let colorAutumn = "white";
 let colorWinter = "white";
 
+let birds, drops, leaves, dog, thunder, glass, cricket, fly, seagull, wolf, sea;
+
 p5.disableFriendlyErrors = true; // disables FES
 
 function preload() {
   soundFormats("ogg", "mp3");
-  
-  birds = loadSound("assets/bird.ogg");
-  drops = loadSound("assets/drops.ogg");
-  leaves = loadSound("assets/leaves.ogg");
-  dog = loadSound("assets/dog.ogg");
-  thunder = loadSound("assets/thunder.ogg");
-  glass = loadSound("assets/glass.ogg");
-  cricket = loadSound("assets/cricket.ogg");
-  fly = loadSound("assets/fly.ogg");
-  seagull = loadSound("assets/seagull.ogg");
-    wolf = loadSound("assets/wolf.ogg");
-    sea = loadSound("assets/sea.ogg");
+
+  birds = loadSound("assets/bird");
+  drops = loadSound("assets/drops");
+  leaves = loadSound("assets/leaves");
+  dog = loadSound("assets/dog");
+  thunder = loadSound("assets/thunder");
+  glass = loadSound("assets/glass");
+  cricket = loadSound("assets/cricket");
+  fly = loadSound("assets/fly");
+  seagull = loadSound("assets/seagull");
+  wolf = loadSound("assets/wolf");
+  sea = loadSound("assets/sea");
 }
 
 function setup() {
@@ -95,11 +97,11 @@ function draw() {
       glass.play(0, tones[int(random(tones.length))], 0.4, 0);
     }
     if (fly.isPlaying() === false && random(100) < 5) {
-    fly.play(0, random(0.8, 1.2), 0.4, 0);
+      fly.play(0, random(0.8, 1.2), 0.4, 0);
     }
     if (seagull.isPlaying() === false) {
       seagull.play();
-    }    
+    }
     let vol = min(accel / 40, 1);
     seagull.setVolume(vol);
   }
@@ -119,7 +121,7 @@ function draw() {
 
   //winter
   if (playing === 1 && option === 4) {
-    let rand = random(100); 
+    let rand = random(100);
     if (wolf.isPlaying() === false && rand < 4) {
       wolf.play(0, random(0.8, 1), 0.7, random(1.5));
     }
@@ -151,7 +153,6 @@ function run() {
   clear();
   playing = 1;
   createCanvas(windowWidth, windowHeight);
-   
 
   noFill("darkgrey");
   stroke("black");
@@ -186,11 +187,12 @@ function stop() {
   fly.stop();
   seagull.stop();
   wolf.stop();
-  sea.stop(); 
+  sea.stop();
 }
 
 function mousePressed() {
   if (!playing) {
+    glass.play(0,1,1,0);
     fullscreen(1);
     createCanvas(windowWidth, windowHeight);
     background("white");
@@ -205,7 +207,6 @@ function mousePressed() {
 
 function doubleClicked() {
   if (playing) {
-    
     // Spring
     if (
       mouseX > 0 &&
