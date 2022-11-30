@@ -15,6 +15,8 @@ let colorWinter = "white";
 p5.disableFriendlyErrors = true; // disables FES
 
 function preload() {
+  soundFormats("ogg", "mp3");
+  
   birds = loadSound("assets/bird.ogg");
   drops = loadSound("assets/drops.ogg");
   leaves = loadSound("assets/leaves.ogg");
