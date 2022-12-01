@@ -186,7 +186,7 @@ function draw() {
     if (drops.isPlaying() === false) {
       drops.play();
     }
-    if (accel > 15 && thunder.isPlaying() === false) {
+    if (accel > 12 && thunder.isPlaying() === false) {
       thunder.play(0, random(0.5, 1.5), 0.5, random(1));
     }
     drops.rate(map(noise(nOff), 0, 1, 0.4, 1.3));
@@ -312,7 +312,8 @@ function mousePressed() {
     noFill();
     text("the seasons", w / 2, h / 2 - 50);
     text("to (de)activate", w / 2, h / 2);
-    setTimeout(run, 2000);
+    text("& shake the device", w / 2, h / 2 + 150)
+    setTimeout(run, 2500);
   }
 }
 
@@ -361,7 +362,7 @@ function doubleClicked() {
         colorSummer = "white";
         colorAutumn = "red";
         colorWinter = "white";
-        playRain(1, 400, 800, 3, 0.8);
+        playRain(1, 400, 700, 8, 0.8);
       } else {
         option = 0;
         colorAutumn = "white";
