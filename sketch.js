@@ -39,6 +39,10 @@ function preload() {
 }
 
 function setup() {
+  document.addEventListener("click", (e) =>
+        {
+            e.preventDefault();
+        })
   w =windowWidth;
   h = windowHeight;
   createCanvas(w,h);
