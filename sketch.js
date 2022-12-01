@@ -302,7 +302,7 @@ function mousePressed() {
       nonios13device = true;
     }
 
-    fullscreen(1);
+    // fullscreen(1);
     w = windowWidth;
     h = windowHeight;
     createCanvas(w, h);
