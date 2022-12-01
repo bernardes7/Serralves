@@ -13,11 +13,22 @@ let colorSummer = "white";
 let colorAutumn = "white";
 let colorWinter = "white";
 
-let permissionGranted = false
-let permissionMotionGranted = false
-let nonios13device = false
+let permissionGranted = false;
+let permissionMotionGranted = false;
+let nonios13device = false;
 
-let birds, drops, leaves, dog, thunder, glass, cricket, fly, seagull, wolf, sea, owl;
+let birds,
+  drops,
+  leaves,
+  dog,
+  thunder,
+  glass,
+  cricket,
+  fly,
+  seagull,
+  wolf,
+  sea,
+  owl;
 
 p5.disableFriendlyErrors = true; // disables FES
 
@@ -39,13 +50,15 @@ function preload() {
 }
 
 function setup() {
-  document.addEventListener("click", (e) =>
-        {
-            e.preventDefault();
-        })
-  w =windowWidth;
+  document.addEventListener("click", (e) => {
+    e.preventDefault();
+  });
+  document.ondblclick = function (e) {
+    e.preventDefault();
+  };
+  w = windowWidth;
   h = windowHeight;
-  createCanvas(w,h);
+  createCanvas(w, h);
   frameRate(4);
   background("white");
   textAlign(CENTER);
@@ -77,28 +90,31 @@ function setup() {
 
 // will handle first time visiting to grant access
 function onAskButtonClicked() {
-  DeviceOrientationEvent.requestPermission().then(response => {
-    if (response === 'granted') {
-      permissionGranted = true
-    } else {
-      permissionGranted = false
-    }
-    this.remove()
-  }).catch(console.error)
+  DeviceOrientationEvent.requestPermission()
+    .then((response) => {
+      if (response === "granted") {
+        permissionGranted = true;
+      } else {
+        permissionGranted = false;
+      }
+      this.remove();
+    })
+    .catch(console.error);
 }
 
 // will handle first time visiting to grant access
 function onAskButtonMotionClicked() {
-  DeviceMotionEvent.requestPermission().then(response => {
-    if (response === 'granted') {
-      permissionMotionGranted = true
-    } else {
-      permissionMotionGranted = false
-    }
-    this.remove()
-  }).catch(console.error)
+  DeviceMotionEvent.requestPermission()
+    .then((response) => {
+      if (response === "granted") {
+        permissionMotionGranted = true;
+      } else {
+        permissionMotionGranted = false;
+      }
+      this.remove();
+    })
+    .catch(console.error);
 }
-
 
 function draw() {
   accel = abs(accelerationY);
@@ -137,7 +153,7 @@ function draw() {
       fly.play(0, random(0.8, 1.2), 0.4, 0);
     }
     if (seagull.isPlaying() === false) {
-      seagull.play(0,random(0.8,1.2),0,0);
+      seagull.play(0, random(0.8, 1.2), 0, 0);
     }
     let vol = min(accel / 40, 1);
     seagull.setVolume(vol);
@@ -155,7 +171,7 @@ function draw() {
     }
     dog.rate(map(noise(nOff), 0, 1, 0.4, 1));
     if (owl.isPlaying() === false) {
-      owl.play(0,random(0.8,1.2),0,0);
+      owl.play(0, random(0.8, 1.2), 0, 0);
     }
     let vol = min(accel / 40, 1);
     owl.setVolume(vol);
@@ -237,56 +253,58 @@ function stop() {
 
 function mousePressed() {
   if (!playing) {
-    glass.play(0,1,1,0);
-    
-    console.log('HERE');
-    
-        if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
-    DeviceOrientationEvent.requestPermission()
-      .catch(() => {
-        // show permission dialog only the first time
-        // it needs to be a user gesture (requirement) in this case, click
-        let askButton = createButton("Allow acess to orientation sensors")
-        askButton.style("font-size", "24px")
-        askButton.position(0, 0)
-        askButton.mousePressed(onAskButtonClicked)
-        throw error // keep the promise chain as rejected
-      })
-      .then(() => {
-        // this runs on subsequent visits
-        permissionGranted = true
-        console.log('HERE1');
-      })
-  } else {nonios13device = true}
-  
-      if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
-    DeviceMotionEvent.requestPermission()
-      .catch(() => {
-        // show permission dialog only the first time
-        // it needs to be a user gesture (requirement) in this case, click
-        let askButton = createButton("Allow acess to motion sensors")
-        askButton.style("font-size", "24px")
-        askButton.position(0, 0)
-        askButton.mousePressed(onAskButtonMotionClicked)
-        throw error // keep the promise chain as rejected
-      })
-      .then(() => {
-        // this runs on subsequent visits
-        permissionMotionGranted = true
-      console.log('HERE2');
-      })
-  } else {nonios13device = true}
-    
-    
-    console.log('HERE3');
+    glass.play(0, 1, 1, 0);
+
+    if (
+      typeof DeviceOrientationEvent !== "undefined" &&
+      typeof DeviceOrientationEvent.requestPermission === "function"
+    ) {
+      DeviceOrientationEvent.requestPermission()
+        .catch(() => {
+          // show permission dialog only the first time
+          // it needs to be a user gesture (requirement) in this case, click
+          let askButton = createButton("Allow acess to orientation sensors");
+          askButton.style("font-size", "24px");
+          askButton.position(0, 0);
+          askButton.mousePressed(onAskButtonClicked);
+          throw error; // keep the promise chain as rejected
+        })
+        .then(() => {
+          // this runs on subsequent visits
+          permissionGranted = true;
+
+          if (
+            typeof DeviceMotionEvent !== "undefined" &&
+            typeof DeviceMotionEvent.requestPermission === "function"
+          ) {
+            DeviceMotionEvent.requestPermission()
+              .catch(() => {
+                // show permission dialog only the first time
+                // it needs to be a user gesture (requirement) in this case, click
+                let askButton = createButton("Allow acess to motion sensors");
+                askButton.style("font-size", "24px");
+                askButton.position(0, 0);
+                askButton.mousePressed(onAskButtonMotionClicked);
+                throw error; // keep the promise chain as rejected
+              })
+              .then(() => {
+                // this runs on subsequent visits
+                permissionMotionGranted = true;
+              });
+          }
+        });
+    } else {
+      nonios13device = true;
+    }
+
     // fullscreen(1);
     w = windowWidth;
-    h = windowHeight;    
+    h = windowHeight;
     createCanvas(w, h);
     background("white");
     stroke("black");
     textSize(50);
-    fill('black');
+    fill("black");
     text("double tap", w / 2, h / 2 - 100);
     noFill();
     text("the seasons", w / 2, h / 2 - 50);
@@ -298,12 +316,7 @@ function mousePressed() {
 function doubleClicked() {
   if (playing) {
     // Spring
-    if (
-      mouseX > 0 &&
-      mouseX < w / 2 &&
-      mouseY > 0 &&
-      mouseY < h / 2
-    ) {
+    if (mouseX > 0 && mouseX < w / 2 && mouseY > 0 && mouseY < h / 2) {
       if (option != 1) {
         stop();
         option = 1;
@@ -320,12 +333,7 @@ function doubleClicked() {
     }
 
     // Summer
-    if (
-      mouseX > w / 2 &&
-      mouseX < w &&
-      mouseY > 0 &&
-      mouseY < w / 2
-    ) {
+    if (mouseX > w / 2 && mouseX < w && mouseY > 0 && mouseY < w / 2) {
       if (option != 2) {
         stop();
         option = 2;
@@ -342,12 +350,7 @@ function doubleClicked() {
     }
 
     // Autumn
-    if (
-      mouseX > 0 &&
-      mouseX < w / 2 &&
-      mouseY > h / 2 &&
-      mouseY < h
-    ) {
+    if (mouseX > 0 && mouseX < w / 2 && mouseY > h / 2 && mouseY < h) {
       if (option != 3) {
         stop();
         option = 3;
@@ -364,12 +367,7 @@ function doubleClicked() {
     }
 
     // Winter
-    if (
-      mouseX > w / 2 &&
-      mouseX < w &&
-      mouseY > h / 2 &&
-      mouseY < h
-    ) {
+    if (mouseX > w / 2 && mouseX < w && mouseY > h / 2 && mouseY < h) {
       if (option != 4) {
         stop();
         option = 4;
