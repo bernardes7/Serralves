@@ -13,7 +13,7 @@ let colorSummer = "white";
 let colorAutumn = "white";
 let colorWinter = "white";
 
-let birds, drops, leaves, dog, thunder, glass, cricket, fly, seagull, wolf, sea;
+let birds, drops, leaves, dog, thunder, glass, cricket, fly, seagull, wolf, sea, owl;
 
 p5.disableFriendlyErrors = true; // disables FES
 
@@ -31,6 +31,7 @@ function preload() {
   seagull = loadSound("assets/seagull");
   wolf = loadSound("assets/wolf");
   sea = loadSound("assets/sea");
+  owl = loadSound("assets/owl");
 }
 
 function setup() {
@@ -103,7 +104,7 @@ function draw() {
       fly.play(0, random(0.8, 1.2), 0.4, 0);
     }
     if (seagull.isPlaying() === false) {
-      seagull.play();
+      seagull.play(0,random(0.8,1.2),0,0);
     }
     let vol = min(accel / 40, 1);
     seagull.setVolume(vol);
@@ -120,6 +121,11 @@ function draw() {
       dog.play(0, 1, 0.6, random(0.2));
     }
     dog.rate(map(noise(nOff), 0, 1, 0.4, 1));
+    if (owl.isPlaying() === false) {
+      owl.play(0,random(0.8,1.2),0,0);
+    }
+    let vol = min(accel / 40, 1);
+    owl.setVolume(vol);
   }
 
   //winter
@@ -131,7 +137,7 @@ function draw() {
     if (drops.isPlaying() === false) {
       drops.play();
     }
-    if (accel > 20 && thunder.isPlaying() === false) {
+    if (accel > 15 && thunder.isPlaying() === false) {
       thunder.play(0, random(0.5, 1.5), 0.5, random(1));
     }
     drops.rate(map(noise(nOff), 0, 1, 0.4, 1.3));
@@ -193,6 +199,7 @@ function stop() {
   seagull.stop();
   wolf.stop();
   sea.stop();
+  owl.stop();
 }
 
 function mousePressed() {
@@ -209,7 +216,7 @@ function mousePressed() {
     text("double tap", w / 2, h / 2 - 100);
     noFill();
     text("the seasons", w / 2, h / 2 - 50);
-    text("to activate", w / 2, h / 2);
+    text("to (de)activate", w / 2, h / 2);
     setTimeout(run, 2000);
   }
 }
