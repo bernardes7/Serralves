@@ -13,6 +13,10 @@ let colorSummer = "white";
 let colorAutumn = "white";
 let colorWinter = "white";
 
+let permissionGranted = false
+let permissionMotionGranted = false
+let nonios13device = false
+
 let birds, drops, leaves, dog, thunder, glass, cricket, fly, seagull, wolf, sea, owl;
 
 p5.disableFriendlyErrors = true; // disables FES
@@ -66,6 +70,31 @@ function setup() {
   filtr = new p5.BandPass();
   glass.playMode("sustain");
 }
+
+// will handle first time visiting to grant access
+function onAskButtonClicked() {
+  DeviceOrientationEvent.requestPermission().then(response => {
+    if (response === 'granted') {
+      permissionGranted = true
+    } else {
+      permissionGranted = false
+    }
+    this.remove()
+  }).catch(console.error)
+}
+
+// will handle first time visiting to grant access
+function onAskButtonMotionClicked() {
+  DeviceMotionEvent.requestPermission().then(response => {
+    if (response === 'granted') {
+      permissionMotionGranted = true
+    } else {
+      permissionMotionGranted = false
+    }
+    this.remove()
+  }).catch(console.error)
+}
+
 
 function draw() {
   accel = abs(accelerationY);
@@ -205,6 +234,47 @@ function stop() {
 function mousePressed() {
   if (!playing) {
     glass.play(0,1,1,0);
+    
+    console.log('HERE');
+    
+        if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
+    DeviceOrientationEvent.requestPermission()
+      .catch(() => {
+        // show permission dialog only the first time
+        // it needs to be a user gesture (requirement) in this case, click
+        let askButton = createButton("Allow acess to orientation sensors")
+        askButton.style("font-size", "24px")
+        askButton.position(0, 0)
+        askButton.mousePressed(onAskButtonClicked)
+        throw error // keep the promise chain as rejected
+      })
+      .then(() => {
+        // this runs on subsequent visits
+        permissionGranted = true
+        console.log('HERE1');
+      })
+  } else {nonios13device = true}
+  
+      if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
+    DeviceMotionEvent.requestPermission()
+      .catch(() => {
+        // show permission dialog only the first time
+        // it needs to be a user gesture (requirement) in this case, click
+        let askButton = createButton("Allow acess to motion sensors")
+        askButton.style("font-size", "24px")
+        askButton.position(0, 0)
+        askButton.mousePressed(onAskButtonMotionClicked)
+        throw error // keep the promise chain as rejected
+      })
+      .then(() => {
+        // this runs on subsequent visits
+        permissionMotionGranted = true
+      console.log('HERE2');
+      })
+  } else {nonios13device = true}
+    
+    
+    console.log('HERE3');
     // fullscreen(1);
     w = windowWidth;
     h = windowHeight;    
