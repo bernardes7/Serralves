@@ -60,26 +60,28 @@ function setup() {
   h = windowHeight;
   createCanvas(w, h);
   frameRate(4);
+ 
   background("white");
   textAlign(CENTER);
   noFill();
   textSize(400);
   stroke("black");
   noFill();
-  text("simb", w / 2, h / 3);
+  let a = h/5
+  for (let i = 0; i < 4; i++) {
+  text("simb", w / 2, i*a)}
   text("iose", w / 2, h);
   fill(255, 0, 0, 200);
   noStroke();
   circle(w / 2, h / 2, w / 1.5);
   stroke("white");
-  textAlign(CENTER);
   textSize(50);
   noFill();
   text("tap to", w / 2, h / 2 - 50);
   textSize(100);
   noFill();
   text("start", w / 2, h / 2 + 50);
-
+  
   // audio constructors
   wind = new p5.Noise();
   wind.disconnect();
@@ -121,6 +123,7 @@ function draw() {
   nOff = nOff + nVel;
   filtrFreq = map(noise(nOff), 0, 1, fmin, fmax);
   filtr.set(filtrFreq, filtrWidth);
+  
 
   // Spring
   if (playing === 1 && option === 1) {
@@ -254,7 +257,6 @@ function stop() {
 function mousePressed() {
   if (!playing) {
     glass.play(0, 1, 1, 0);
-
     if (
       (typeof DeviceOrientationEvent !== "undefined" &&
       typeof DeviceOrientationEvent.requestPermission === "function")  
@@ -312,7 +314,10 @@ function mousePressed() {
     noFill();
     text("the seasons", w / 2, h / 2 - 50);
     text("to (de)activate", w / 2, h / 2);
-    text("& shake the device", w / 2, h / 2 + 150)
+    fill("black");
+    text("& shake", w / 2, h / 2 + 50);
+    noFill();
+    text("the device", w / 2, h / 2 + 100);
     setTimeout(run, 2500);
   }
 }
