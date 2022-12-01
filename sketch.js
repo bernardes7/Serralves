@@ -256,9 +256,10 @@ function mousePressed() {
     glass.play(0, 1, 1, 0);
 
     if (
-      typeof DeviceOrientationEvent !== "undefined" &&
-      typeof DeviceOrientationEvent.requestPermission === "function"
+      (typeof DeviceOrientationEvent !== "undefined" &&
+      typeof DeviceOrientationEvent.requestPermission === "function")  
     ) {
+      if (permissionGranted !== true && permissionMotionGranted !== true) {
       DeviceOrientationEvent.requestPermission()
         .catch(() => {
           // show permission dialog only the first time
@@ -274,8 +275,9 @@ function mousePressed() {
           permissionGranted = true;
 
           if (
-            typeof DeviceMotionEvent !== "undefined" &&
-            typeof DeviceMotionEvent.requestPermission === "function"
+            (typeof DeviceMotionEvent !== "undefined" &&
+            typeof DeviceMotionEvent.requestPermission === "function")  && (
+            permissionGranted !== true && permissionMotionGranted !== true)
           ) {
             DeviceMotionEvent.requestPermission()
               .catch(() => {
@@ -283,7 +285,7 @@ function mousePressed() {
                 // it needs to be a user gesture (requirement) in this case, click
                 let askButton = createButton("Allow acess to motion sensors");
                 askButton.style("font-size", "24px");
-                askButton.position(0, 0);
+                askButton.position(0, 10);
                 askButton.mousePressed(onAskButtonMotionClicked);
                 throw error; // keep the promise chain as rejected
               })
@@ -293,11 +295,12 @@ function mousePressed() {
               });
           }
         });
+      }
     } else {
       nonios13device = true;
     }
 
-    // fullscreen(1);
+    fullscreen(1);
     w = windowWidth;
     h = windowHeight;
     createCanvas(w, h);
