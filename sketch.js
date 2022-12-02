@@ -287,7 +287,7 @@ function mousePressed() {
                 // it needs to be a user gesture (requirement) in this case, click
                 let askButton = createButton("Allow acess to motion sensors");
                 askButton.style("font-size", "24px");
-                askButton.position(0, 10);
+                askButton.position(0, 35);
                 askButton.mousePressed(onAskButtonMotionClicked);
                 throw error; // keep the promise chain as rejected
               })
