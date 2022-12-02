@@ -217,25 +217,35 @@ function run() {
   h = windowHeight;
   createCanvas(w, h);
 
-  noFill("darkgrey");
-  stroke("black");
-
+  
   fill(colorSpring);
+  stroke("lightgrey");
   rect(0, 0, w / 2, h / 2);
+  stroke("green");
+  fill('white');
   textAlign(LEFT);
   textSize(40);
   text("spring", 10, 50);
 
   fill(colorSummer);
+  stroke("lightgrey");
   rect(w / 2, 0, w - 10, h / 2);
+  stroke("orange");
+  fill('white');
   text("summer", w / 2 + 10, 50);
 
   fill(colorAutumn);
+  stroke("lightgrey");
   rect(0, h / 2, w / 2, h - 10);
+  stroke('red');
+  fill('white');
   text("autumn", 10, h / 2 + 50);
 
   fill(colorWinter);
+  stroke("lightgrey");
   rect(w / 2, h / 2, w - 1, h - 10);
+  stroke("blue");
+  fill('white');
   text("winter", w / 2 + 10, h / 2 + 50);
 }
 
@@ -302,7 +312,7 @@ function mousePressed() {
       nonios13device = true;
     }
 
-    // fullscreen(1);
+    //fullscreen(1);
     w = windowWidth;
     h = windowHeight;
     createCanvas(w, h);
@@ -329,7 +339,7 @@ function doubleClicked() {
       if (option != 1) {
         stop();
         option = 1;
-        colorSpring = "red";
+        colorSpring = "green";
         colorSummer = "white";
         colorAutumn = "white";
         colorWinter = "white";
@@ -347,7 +357,7 @@ function doubleClicked() {
         stop();
         option = 2;
         colorSpring = "white";
-        colorSummer = "red";
+        colorSummer = "orange";
         colorAutumn = "white";
         colorWinter = "white";
         playRain(1, 40, 200, 10, 0.05);
@@ -383,7 +393,7 @@ function doubleClicked() {
         colorSpring = "white";
         colorSummer = "white";
         colorAutumn = "white";
-        colorWinter = "red";
+        colorWinter = "blue";
         playRain(1, 400, 1000, 3, 0.8);
       } else {
         option = 0;
