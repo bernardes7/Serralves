@@ -266,7 +266,7 @@ function stop() {
 
 function mousePressed() {
   if (!playing) {
-    glass.play(0, 1, 1, 0);
+    glass.play(0, 1, 0.2, 0);
     if (
       (typeof DeviceOrientationEvent !== "undefined" &&
       typeof DeviceOrientationEvent.requestPermission === "function")  
